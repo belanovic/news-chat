@@ -6,7 +6,6 @@ const config = require('config');
 const homeRoute = require('./routes/home');
 // const HOST_BACKEND = require('./hostBackend.js');
 const mongoose = require('mongoose');
-const Message = require('./models/Message');        
 
 /////////////////// mongodb initialisee
 
@@ -35,6 +34,9 @@ const io = socketIO(server, {
 });
 
 io.on('connection', async (socket) => {
+
+  const Message = require('./models/Message')(socket.handshake.headers.origin);
+
   /* 
       socket.on('initial-rooms', (rooms) => {
         rooms.forEach(prom => {
