@@ -44,8 +44,11 @@ io.on('connection', async (socket) => {
         });
       }) */
   const messagesDB = await Message.find();
+  console.log(messagesDB);
+  if(!messagesDB) return;
 
   const timeOfLastMessage = messagesDB[messagesDB.length - 1].milliseconds;
+
   const deletedMessages = await Message.deleteMany({milliseconds: {$lt: timeOfLastMessage - 660000} })
 
   socket.emit('messagesDB', messagesDB);
