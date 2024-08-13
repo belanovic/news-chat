@@ -37,18 +37,13 @@ const copies = config.get('copies').split(' ');
 
 module.exports = function createModel(origin) {
 
-    let messageSuffix;
+    let messageSuffix = '';
 
     copies.forEach((copy, i) => {
-        if(origin.includes('localhost')) {
-            messageSuffix = '';
-            return;
-        }
+
         if(origin.includes(copy)) {
             messageSuffix = copy;
-            if(copy == '0') messageSuffix == '';
         }
-        
     })
      
     return mongoose.model(`Message${messageSuffix}`, messageSchema);
