@@ -47,8 +47,6 @@ module.exports = function createModel(origin) {
         if(origin.includes(copy)) {
             messageSuffix = copy;
             if(copy == '0') messageSuffix == '';
-        } else {
-            messageSuffix = '';
         }
         
     })
