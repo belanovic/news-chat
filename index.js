@@ -43,13 +43,13 @@ io.on('connection', async (socket) => {
           socket.join(prom);
         });
       }) */
-  const messagesDB = await Message.find();
-  console.log(messagesDB);
-  if(!messagesDB) return;
 
-  const timeOfLastMessage = messagesDB[messagesDB.length - 1].milliseconds;
+  let messagesDB = await Message.find();
 
-  const deletedMessages = await Message.deleteMany({milliseconds: {$lt: timeOfLastMessage - 660000} })
+  if(messagesDB.length > 0) {
+    const timeOfLastMessage = messagesDB[messagesDB.length - 1].milliseconds;
+    const deletedMessages = await Message.deleteMany({milliseconds: {$lt: timeOfLastMessage - 660000} })
+  }
 
   socket.emit('messagesDB', messagesDB);
 

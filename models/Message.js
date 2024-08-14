@@ -41,6 +41,11 @@ module.exports = function createModel(origin) {
 
     copies.forEach((copy, i) => {
 
+        if(origin.includes('localhost')) {
+            messageSuffix = ''
+            return
+        }
+
         if(origin.includes(copy)) {
             messageSuffix = copy;
         }
